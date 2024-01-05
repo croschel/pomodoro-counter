@@ -32,13 +32,18 @@ export const Home: React.FC = () => {
       minutesAmount: 0,
     },
   })
-  const { handleSubmit, formState } = newCycleForm
+  const { handleSubmit, formState, reset } = newCycleForm
 
   const isSubmitDisabled = Object.keys(formState.errors).length > 0
 
+  const handleSubmitCycle = (data: NewCycleFormData) => {
+    handleCreateNewCycle(data)
+    reset()
+  }
+
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
+      <form onSubmit={handleSubmit(handleSubmitCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
