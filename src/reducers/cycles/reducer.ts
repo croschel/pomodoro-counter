@@ -1,4 +1,5 @@
-import { Cycle } from '../@types/cycles'
+import { Cycle } from '../../@types/cycles'
+import { ActionTypes } from './actions'
 
 interface CyclesState {
   cycles: Cycle[]
@@ -7,13 +8,13 @@ interface CyclesState {
 
 export const cyclesReducer = (state: CyclesState, action: any) => {
   switch (action.type) {
-    case 'ADD_NEW_CYCLE':
+    case ActionTypes.ADD_NEW_CYCLE:
       return {
         ...state,
         cycles: [...state.cycles, action.payload.newCycle],
         activeCycleId: action.payload.newCycle.id,
       }
-    case 'INTERRUPT_CYCLE':
+    case ActionTypes.INTERRUPT_CYCLE:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
@@ -25,7 +26,7 @@ export const cyclesReducer = (state: CyclesState, action: any) => {
         }),
         activeCycleId: null,
       }
-    case 'MARK_CYCLE_AS_FINISHED':
+    case ActionTypes.MARK_CYCLE_AS_FINISHED:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
